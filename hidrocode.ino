@@ -97,7 +97,7 @@ void setup() {
 }
 
 void loop() {
-  String message = "Monitoramento Hidropônico\n.\n";
+  String message = "Monitoramento Hidropônico\n \n";
 
   // Leitura da temperatura da água (DS18B20)
   sensors.requestTemperatures();
