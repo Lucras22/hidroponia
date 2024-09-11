@@ -11,11 +11,11 @@ void loop() {
   int tdsValue = analogRead(tdsPin);
 
   // Converte o valor do sensor em milivolts (mV)
-  float voltage = (tdsValue / 4095.0) * 3300; // 4095 é o valor máximo de 12 bits, 3300 é a referência de 3.3V
-  Serial.print("TDS Value (Raw): ");
+  float condutivy = tdsValue * 2;
+  Serial.print("TDS Value (PPM): ");
   Serial.println(tdsValue);
-  Serial.print("Voltage (mV): ");
-  Serial.println(voltage);
+  Serial.print("Condutividade Eletrica (ECC): ");
+  Serial.println(condutivy);
 
   // Aqui você pode adicionar uma fórmula para converter a tensão em TDS em ppm se necessário
   // Exemplo: TDS (ppm) = (Voltagem em mV - Valor de calibração) / Fator de conversão
