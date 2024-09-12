@@ -16,7 +16,7 @@
 
 #define RELAY_PIN 19
 
-int buttonState = 0;
+int waterFlux = 0;
 
 // Credenciais da rede Wi-Fi LISA
 // const char* ssid = "WIFI LISA";
@@ -189,8 +189,8 @@ message += "Índice UV: " + String(uv) + " V\n";
   }
 
   // Fluxo de água utilizando o estado do botão
-  buttonState = digitalRead(BUTTON_PIN);
-  if (buttonState == LOW) { 
+  waterFlux = digitalRead(BUTTON_PIN);
+  if (waterFlux == LOW) { 
     message += "Há fluxo de água\n";
   } else {
     message += "Não há fluxo de água\n";
