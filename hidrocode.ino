@@ -18,14 +18,18 @@
 
 int buttonState = 0;
 
-// Credenciais da rede Wi-Fi
-const char* ssid = "WIFI LISA";
-const char* password = "34Eua7WYBn";
+// Credenciais da rede Wi-Fi LISA
+// const char* ssid = "WIFI LISA";
+// const char* password = "34Eua7WYBn";
+
+// Credenciais da rede Wi-Fi DISCENTES
+const char* ssid = "IFCE_DISCENTES";
+const char* password = "ifce@bvg";
 
 // Credenciais do Telegram
 // BOT LUCAS
-//const String botToken = "7330394567:AAFF6ArePK4t3QbCLtZMHgFFEGsyyWoJSVo";
-//const String chatId = "7003158288";
+const String botToken = "7330394567:AAFF6ArePK4t3QbCLtZMHgFFEGsyyWoJSVo";
+const String chatId = "7003158288";
 
 // BOT RENATO
 //const String botToken = "7432114712:AAFNhmK2mkbTUROiS8qbVYknGBc1vRPKVJY";
