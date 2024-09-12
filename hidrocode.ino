@@ -129,6 +129,7 @@ void loop() {
 
  // Leitura do índice UV
   int leitura_porta = analogRead(UV_PIN);
+  int uv;
 
 //De acordo com a leitura define o indice UV corrrspondente
   if (leitura_porta <= 10) {
@@ -172,7 +173,7 @@ message += "Índice UV: " + String(uv) + " V\n";
 
   // Leitura do sensor de condutividade da água (TDS)
   int tdsValue = analogRead(TDS_PIN);
-  float conductivity = (tdsValue * 2;
+  float conductivity = tdsValue * 2;
   message += "TDS Value: " + String(tdsValue) + "PPM\n";
   message += "Tensão: " + String(conductivity) + " ECC\n";
 
