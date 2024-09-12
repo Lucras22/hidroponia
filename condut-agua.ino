@@ -1,5 +1,5 @@
 // Define o pino ao qual o sensor TDS está conectado
-const int tdsPin = 34;  // Alterar conforme o pino de conexão
+const int tdsPin = 15;  // Alterar conforme o pino de conexão
 
 void setup() {
   Serial.begin(115200);
