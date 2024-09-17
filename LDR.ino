@@ -1,5 +1,5 @@
 #define LDR_PIN 2  // Pino analógico onde o LDR está conectado
-#define LDR_THRESHOLD 1000  // Limite para determinar se é dia ou noite
+#define LDR_THRESHOLD 2000  // Limite para determinar se é dia ou noite
 
 void setup() {
   Serial.begin(115200);  // Inicializa a comunicação serial
