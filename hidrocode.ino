@@ -174,8 +174,8 @@ message += "Índice UV: " + String(uv) + " V\n";
   // Leitura do sensor de condutividade da água (TDS)
   int tdsValue = analogRead(TDS_PIN);
   float conductivity = tdsValue * 2;
-  message += "TDS Value: " + String(tdsValue) + "PPM\n";
-  message += "Tensão: " + String(conductivity) + " ECC\n";
+  message += "Valor PPM: " + String(tdsValue) + "\n";
+  message += "Valor ECC: " + String(conductivity) + " \n";
 
   // Leitura do sensor LDR (luminosidade)
   int luminosity = analogRead(LDR_PIN);
