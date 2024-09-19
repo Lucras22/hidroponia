@@ -167,8 +167,8 @@ message += "Índice UV: " + String(uv) + " V\n";
   if (isnan(humidity) || isnan(temperature)) {
     message += "Falha ao ler do sensor DHT!\n";
   } else {
-    message += "Umidade: " + String(humidity) + " %\n";
-    message += "Temperatura do ar: " + String(temperature) + " °C\n";
+    message += "Umidade do AR: " + String(humidity) + " %\n";
+    message += "Temperatura do AR: " + String(temperature) + " °C\n";
   }
 
   // Leitura do sensor de condutividade da água (TDS)
@@ -182,8 +182,7 @@ message += "Índice UV: " + String(uv) + " V\n";
   message += "Valor do LDR: " + String(luminosity) + "\n";
 
   // Condição do período (dia ou noite)
-  bool isDay = (luminosity < 2000);  // Ajuste o valor de corte conforme necessário
-  if (isDay) {
+  if (luminosity < 2000) {
     message += "Período do dia: Dia\n";
   } else {
     message += "Período do dia: Noite\n";
