@@ -1,5 +1,3 @@
-#include <WiFi.h>
-
 // Defina o pino para o sensor de luminosidade
 const int luminosityPin = 34;  // Exemplo de pino analógico
 
