@@ -179,7 +179,7 @@ message += "Índice UV: " + String(uv) + " V\n";
 
   // Leitura do sensor LDR (luminosidade)
   int luminosity = analogRead(LDR_PIN);
-  message += "Valor do LDR: " + String(luminosity) + "\n";
+  message += "Intensidade Luminosa: " + String(luminosity) + "\n";
 
   // Condição do período (dia ou noite)
   if (luminosity < 2000) {
@@ -200,5 +200,5 @@ message += "Índice UV: " + String(uv) + " V\n";
   Serial.println(message);  // Exibe no monitor serial
   sendMessage(message);  // Envia para o Telegram
 
-  delay(10000);  // Envia a cada 10 segundos
+  delay(900000);  // Envia a cada 10 segundos
 }
