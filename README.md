@@ -32,3 +32,38 @@ O sistema utiliza a conectividade Wi-Fi do ESP32 para enviar relatórios periód
 - Monitoramento remoto: O envio de relatórios para o Telegram permite que o operador esteja sempre informado sobre o estado do sistema, podendo tomar decisões rápidas em caso de problemas.
 - Sustentabilidade: O uso otimizado da água e dos nutrientes contribui para uma agricultura mais sustentável, o que é especialmente importante em regiões com recursos limitados.
 - Este sistema pode ser expandido e adaptado para diferentes tipos de cultivos hidropônicos, representando uma solução versátil e de fácil acesso para pequenos e grandes produtores.
+
+
+### 6. Sensores e suas portas
+
+Sensor de Temperatura da Água (DS18B20)
+Porta: ONE_WIRE_BUS (GPIO 4)
+
+Sensor de Nível de Água (HC-SR04)
+Pino do Trig: TRIG_PIN (GPIO 13)
+Pino do Echo: ECHO_PIN (GPIO 14)
+
+Sensor LDR (Luminosidade)
+Porta: LDR_PIN (GPIO 34)
+
+Sensor DHT22 (Temperatura e Umidade)
+Porta: DHT_PIN (GPIO 15)
+
+Sensor de Condutividade da Água (TDS)
+Porta: TDS_PIN (GPIO 32)
+
+Sensor de Índice UV
+Porta: UV_PIN (GPIO 33)
+
+Botão (para fluxo de água)
+Porta: BUTTON_PIN (GPIO 12)
+
+Relé (para controle de algum dispositivo)
+Porta: RELAY_PIN (GPIO 19)
+
+## 7. Bibliotecas Utilizadas
+<WiFi.h>: Para conectar o ESP32 à rede Wi-Fi.
+<HTTPClient.h>: Para enviar requisições HTTP, neste caso, para enviar mensagens via Telegram.
+<OneWire.h>: Para comunicação com o sensor DS18B20 que utiliza o protocolo OneWire.
+<DallasTemperature.h>: Biblioteca para facilitar a leitura da temperatura do sensor DS18B20.
+"DHT.h": Biblioteca para ler dados do sensor DHT22, que mede temperatura e umidade.
