@@ -61,9 +61,13 @@ Porta: BUTTON_PIN (GPIO 12)
 Relé (para controle de algum dispositivo)
 Porta: RELAY_PIN (GPIO 19)
 
-## 7. Bibliotecas Utilizadas
+### 7. Bibliotecas Utilizadas
 <WiFi.h>: Para conectar o ESP32 à rede Wi-Fi.
+
 <HTTPClient.h>: Para enviar requisições HTTP, neste caso, para enviar mensagens via Telegram.
+
 <OneWire.h>: Para comunicação com o sensor DS18B20 que utiliza o protocolo OneWire.
+
 <DallasTemperature.h>: Biblioteca para facilitar a leitura da temperatura do sensor DS18B20.
+
 "DHT.h": Biblioteca para ler dados do sensor DHT22, que mede temperatura e umidade.
