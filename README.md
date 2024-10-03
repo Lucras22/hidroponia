@@ -37,28 +37,37 @@ O sistema utiliza a conectividade Wi-Fi do ESP32 para enviar relatórios periód
 ### 6. Sensores e suas portas
 
 Sensor de Temperatura da Água (DS18B20)
+
 Porta: ONE_WIRE_BUS (GPIO 4)
 
-Sensor de Nível de Água (HC-SR04)
+Sensor de Nível de Água (HC-SR04) 
+
 Pino do Trig: TRIG_PIN (GPIO 13)
+
 Pino do Echo: ECHO_PIN (GPIO 14)
 
 Sensor LDR (Luminosidade)
+
 Porta: LDR_PIN (GPIO 34)
 
 Sensor DHT22 (Temperatura e Umidade)
+
 Porta: DHT_PIN (GPIO 15)
 
 Sensor de Condutividade da Água (TDS)
+
 Porta: TDS_PIN (GPIO 32)
 
 Sensor de Índice UV
+
 Porta: UV_PIN (GPIO 33)
 
 Botão (para fluxo de água)
+
 Porta: BUTTON_PIN (GPIO 12)
 
 Relé (para controle de algum dispositivo)
+
 Porta: RELAY_PIN (GPIO 19)
 
 ### 7. Bibliotecas Utilizadas
