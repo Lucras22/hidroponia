@@ -26,7 +26,11 @@ O sistema faz uso de diversos sensores para garantir o monitoramento abrangente 
 ### 4. Integração com o Telegram
 O sistema utiliza a conectividade Wi-Fi do ESP32 para enviar relatórios periódicos ao Telegram. Esses relatórios contêm dados detalhados sobre o estado dos sensores, incluindo a temperatura da água e do ar, umidade, índice UV, nível de água e status do fluxo de irrigação. O envio é realizado via HTTP utilizando a API do Telegram, permitindo que o usuário receba atualizações diretamente em seu dispositivo móvel a cada 10 segundos (esse intervalo pode ser ajustado conforme a necessidade).
 
-### 5. Benefícios
+### 5. Integração Avançada com API via HTTP PUT e Exibição em Tela
+
+O sistema foi aprimorado para realizar requisições HTTP PUT, enviando os dados coletados pelos sensores diretamente para uma API REST. Utilizando a conectividade Wi-Fi do ESP32, o sistema envia as informações em formato JSON, que incluem a temperatura da água, nível de água, temperatura do ar, umidade, condutividade, luminosidade, e o índice UV. Esse avanço permite uma integração mais robusta com sistemas externos, onde os dados são registrados e podem ser analisados de forma centralizada.
+
+### 6. Benefícios
 - Eficiência no uso de recursos: O monitoramento constante das condições da solução nutritiva e do ambiente reduz o desperdício de água e nutrientes, otimizando o crescimento das plantas.
 - Automação: O sistema automatiza o controle da irrigação e pode ser ajustado para tomar decisões com base nos parâmetros ambientais, liberando o operador para outras atividades.
 - Monitoramento remoto: O envio de relatórios para o Telegram permite que o operador esteja sempre informado sobre o estado do sistema, podendo tomar decisões rápidas em caso de problemas.
@@ -34,7 +38,7 @@ O sistema utiliza a conectividade Wi-Fi do ESP32 para enviar relatórios periód
 - Este sistema pode ser expandido e adaptado para diferentes tipos de cultivos hidropônicos, representando uma solução versátil e de fácil acesso para pequenos e grandes produtores.
 
 
-### 6. Sensores e suas portas
+### 7. Sensores e suas portas
 
 Sensor de Temperatura da Água (DS18B20)
 
@@ -70,7 +74,7 @@ Relé (para controle de algum dispositivo)
 
 Porta: RELAY_PIN (GPIO 19)
 
-### 7. Bibliotecas Utilizadas
+### 8. Bibliotecas Utilizadas
 <WiFi.h>: Para conectar o ESP32 à rede Wi-Fi.
 
 <HTTPClient.h>: Para enviar requisições HTTP, neste caso, para enviar mensagens via Telegram.
