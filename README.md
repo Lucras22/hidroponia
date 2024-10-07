@@ -32,7 +32,7 @@ O sistema utiliza a conectividade Wi-Fi do ESP32 para enviar relatórios periód
 
 O sistema foi aprimorado para realizar requisições HTTP PUT, enviando os dados coletados pelos sensores diretamente para uma API REST. Utilizando a conectividade Wi-Fi do ESP32, o sistema envia as informações em formato JSON, que incluem a temperatura da água, nível de água, temperatura do ar, umidade, condutividade, luminosidade, e o índice UV. Esse avanço permite uma integração mais robusta com sistemas externos, onde os dados são registrados e podem ser analisados de forma centralizada.
 
-<img src="https://github.com/user-attachments/assets/46267aca-0947-43b8-92d4-e80115671c57" alt="simulador beta" width="500"/>
+<img src="https://github.com/user-attachments/assets/24fb915d-1832-4dff-abc8-0e90ef81bf71" alt="simulador beta" width="500"/>
 
 
 ### 6. Benefícios
