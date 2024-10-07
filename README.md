@@ -26,9 +26,14 @@ O sistema faz uso de diversos sensores para garantir o monitoramento abrangente 
 ### 4. Integração com o Telegram
 O sistema utiliza a conectividade Wi-Fi do ESP32 para enviar relatórios periódicos ao Telegram. Esses relatórios contêm dados detalhados sobre o estado dos sensores, incluindo a temperatura da água e do ar, umidade, índice UV, nível de água e status do fluxo de irrigação. O envio é realizado via HTTP utilizando a API do Telegram, permitindo que o usuário receba atualizações diretamente em seu dispositivo móvel a cada 10 segundos (esse intervalo pode ser ajustado conforme a necessidade).
 
+<img src="https://github.com/user-attachments/assets/acc0729b-dbcf-4f8c-99d3-2215f762f5bc" alt="simulador beta" width="250"/>
+
 ### 5. Integração Avançada com API via HTTP PUT e Exibição em Tela
 
 O sistema foi aprimorado para realizar requisições HTTP PUT, enviando os dados coletados pelos sensores diretamente para uma API REST. Utilizando a conectividade Wi-Fi do ESP32, o sistema envia as informações em formato JSON, que incluem a temperatura da água, nível de água, temperatura do ar, umidade, condutividade, luminosidade, e o índice UV. Esse avanço permite uma integração mais robusta com sistemas externos, onde os dados são registrados e podem ser analisados de forma centralizada.
+
+<img src="https://github.com/user-attachments/assets/46267aca-0947-43b8-92d4-e80115671c57" alt="simulador beta" width="500"/>
+
 
 ### 6. Benefícios
 - Eficiência no uso de recursos: O monitoramento constante das condições da solução nutritiva e do ambiente reduz o desperdício de água e nutrientes, otimizando o crescimento das plantas.
