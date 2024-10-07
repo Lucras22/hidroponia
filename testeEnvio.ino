@@ -162,7 +162,7 @@ void loop() {
         http.begin(url);
         http.addHeader("Content-Type", "application/json");
         
-        int httpResponseCode = http.PUT(json); // Alterado de POST para PUT
+        int httpResponseCode = http.PUT(json);
 
         if (httpResponseCode > 0) {
             String response = http.getString();
