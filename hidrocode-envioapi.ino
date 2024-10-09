@@ -1,23 +1,24 @@
+//Codigo feito por Lucas Galindo
+//Artigos estudados:
+
+
+
+
+//Bibliotecas usadas
 #include <WiFi.h>
 #include <HTTPClient.h>
-#include <NTPClient.h>
-#include <WiFiUdp.h>
 #include <OneWire.h>
 #include <DallasTemperature.h>
 #include "DHT.h"
 
-// Informações da rede Wi-Fi
-const char* ssid = "IFCE_DISCENTES";  // Mantenha o SSID que você deseja
+// conexão da rede Wi-Fi
+const char* ssid = "IFCE_DISCENTES"; 
 const char* password = "ifce@bvg";
 
 // Defina a URL do servidor
-String url = "https://devicesserver.onrender.com/api/devices/666840141508522b72de6983"; // Substitua por seu endpoint PUT
+String url = "https://devicesserver.onrender.com/api/devices/665f4fdb8c75c69202d26331"; // Substitua pelo ID da hidroponia que foi criada
 
-// Configurações para o NTP (Time)
-WiFiUDP ntpUDP;
-NTPClient timeClient(ntpUDP, "pool.ntp.org", -3 * 3600, 60000); // UTC-3 para o Brasil
-
-// Definindo os pinos para os sensores
+// Definindo os nomes dos pinos para os sensores
 #define ONE_WIRE_BUS 4
 #define TRIG_PIN 13
 #define ECHO_PIN 14
@@ -25,8 +26,8 @@ NTPClient timeClient(ntpUDP, "pool.ntp.org", -3 * 3600, 60000); // UTC-3 para o 
 #define DHT_PIN 15
 #define TDS_PIN 32
 #define UV_PIN 33
-#define BUTTON_PIN 12
-#define RELAY_PIN 19
+#define waterFlux_Pin 12
+#define RELE_PIN 19
 
 int waterFlux = 0;
 
@@ -46,9 +47,6 @@ void setup() {
     }
     Serial.println("Conectado ao WiFi");
 
-    // Iniciar NTP Client
-    timeClient.begin();
-
     // Inicializando sensores
     sensors.begin();
     dht.begin();
@@ -58,37 +56,22 @@ void setup() {
     pinMode(LDR_PIN, INPUT);
     pinMode(TDS_PIN, INPUT);
     pinMode(UV_PIN, INPUT);
-    pinMode(BUTTON_PIN, INPUT_PULLUP);
+    pinMode(waterFlux_Pin, INPUT_PULLUP);
 }
 
 void loop() {
-    // Atualizando o tempo
-    timeClient.update();
-    unsigned long epochTime = timeClient.getEpochTime();
-    struct tm *ptm = gmtime((time_t *)&epochTime);
-
-    int year = ptm->tm_year + 1900;
-    int month = ptm->tm_mon + 1;
-    int day = ptm->tm_mday;
-    int hour = ptm->tm_hour;
-    int minute = ptm->tm_min;
-    int second = ptm->tm_sec;
-
-    String Date = String(day) + "/" + String(month) + "/" + String(year);
-    String Time = String(hour) + ":" + String(minute) + ":" + String(second);
-
-    // Geração da string JSON para enviar
+    // Geração da mensagem em JSON para enviar
     String json = "{";
     json += "\"espStatus\": true,";
     json += "\"measures\": [";
     json += "{";
 
-    // Leitura da temperatura da água (DS18B20)
+    // Temperatura da água
     sensors.requestTemperatures();
     float waterTemperature = sensors.getTempCByIndex(0);
     json += "\"waterTemperature\": " + String(waterTemperature) + ",";
 
-    // Leitura do nível de água (HC-SR04)
+    // Nível de água
     digitalWrite(TRIG_PIN, LOW);
     delayMicroseconds(2);
     digitalWrite(TRIG_PIN, HIGH);
@@ -98,7 +81,7 @@ void loop() {
     float containerLevel = (duration * 0.0343) / 2;
     json += "\"containerLevel\": " + String(containerLevel) + ",";
 
-    // Leitura do sensor DHT22
+    // Temperatura e Umidade
     float humidity = dht.readHumidity();
     float temperature = dht.readTemperature();
     if (isnan(humidity) || isnan(temperature)) {
@@ -109,16 +92,16 @@ void loop() {
         json += "\"temperature\": " + String(temperature) + ",";
     }
 
-    // Leitura do sensor de condutividade da água (TDS)
+    // condutividade da água
     int tdsValue = analogRead(TDS_PIN);
     float conductivity = tdsValue * 2;
     json += "\"conductivity\": " + String(conductivity) + ",";
 
-    // Leitura do sensor LDR (luminosidade)
+    // luminosidade
     int luminosity = analogRead(LDR_PIN);
     json += "\"luminosity\": " + String(luminosity) + ",";
 
-    // Leitura do índice UV
+    // índice UV
     int leitura_porta = analogRead(UV_PIN);
     int uv;
 
@@ -150,13 +133,28 @@ void loop() {
     }
 
     json += "\"uv\": " + String(uv) + ",";
+
+  //fluxo de agua + status do motor
+    int waterFlux = LOW;
+    waterFlux = digitalRead(waterFlux_Pin);
+
+  if (waterFlux == HIGH) {
+      json += "\"waterFlux\": " + String(waterFlux) + ",";
+      json += "\"engineStatus\": " + String(waterFlux) + ",";
+  } else {
+    json += "\"waterFlux\": " + String(waterFlux) + ",";
+    json += "\"engineStatus\": " + String(waterFlux) + ",";
+  }
+
+    
+    
     json += "\"date\": \"" + Date + "\",";
     json += "\"time\": \"" + Time + "\"";
     json += "}";
     json += "]";
     json += "}";
 
-    // Envio dos dados para o servidor
+    // Envio dos dados para a interface web
     if (WiFi.status() == WL_CONNECTED) {
         HTTPClient http;
         http.begin(url);
