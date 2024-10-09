@@ -21,7 +21,7 @@ O sistema faz uso de diversos sensores para garantir o monitoramento abrangente 
 
 - LDR (Sensor de Luminosidade): Detecta a intensidade da luz ambiente para determinar se é dia ou noite, e esse dado pode ser utilizado para controlar a bomba de irrigação e outras ações automatizadas.
 
-- Botão de Fluxo de Água: Simula um sensor de fluxo de água para determinar se há fluxo no sistema de irrigação.
+- Sensor de Fluxo de Água: utilizado para monitorar se há ou não fluxo de água no sistema de irrigação automatizado. Esse sensor detecta a passagem da água e converte a rotação das lâminas internas em pulsos que representam a vazão da água. Sempre que a água fluir, o sensor gera sinais de pulso, que indicam a presença de fluxo. Além disso, o sistema também vai monitorar o status do motor de irrigação (controlado por relé). Assim, será possível verificar se o fluxo de água está presente quando o motor está ligado..
 
 ### 4. Integração com o Telegram
 O sistema utiliza a conectividade Wi-Fi do ESP32 para enviar relatórios periódicos ao Telegram. Esses relatórios contêm dados detalhados sobre o estado dos sensores, incluindo a temperatura da água e do ar, umidade, índice UV, nível de água e status do fluxo de irrigação. O envio é realizado via HTTP utilizando a API do Telegram, permitindo que o usuário receba atualizações diretamente em seu dispositivo móvel a cada 10 segundos (esse intervalo pode ser ajustado conforme a necessidade).
