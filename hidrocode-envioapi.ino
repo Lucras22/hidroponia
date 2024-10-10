@@ -146,10 +146,6 @@ void loop() {
     json += "\"engineStatus\": " + String(waterFlux) + ",";
   }
 
-    
-    
-    json += "\"date\": \"" + Date + "\",";
-    json += "\"time\": \"" + Time + "\"";
     json += "}";
     json += "]";
     json += "}";
