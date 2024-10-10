@@ -7,16 +7,29 @@
 //Bibliotecas usadas
 #include <WiFi.h>
 #include <HTTPClient.h>
+#include <NTPClient.h>
+#include <WiFiUdp.h>
 #include <OneWire.h>
 #include <DallasTemperature.h>
 #include "DHT.h"
 
+// Credenciais da rede Wi-Fi LISA
+const char* ssid = "WIFI LISA";
+const char* password = "34Eua7WYBn";
+
 // conexão da rede Wi-Fi
-const char* ssid = "IFCE_DISCENTES"; 
-const char* password = "ifce@bvg";
+// const char* ssid = "IFCE_DISCENTES"; 
+// const char* password = "ifce@bvg";
+
+// teste
+// Configurações para o NTP (Time)
+WiFiUDP ntpUDP;
+NTPClient timeClient(ntpUDP, "pool.ntp.org", -3 * 3600, 60000); // UTC-3 para o Brasil
+
+
 
 // Defina a URL do servidor
-String url = "https://devicesserver.onrender.com/api/devices/665f4fdb8c75c69202d26331"; // Substitua pelo ID da hidroponia que foi criada
+String url = "https://devicesserver.onrender.com/api/devices/665f4f0b8c75c69202d2631d"; // Substitua pelo ID da hidroponia que foi criada
 
 // Definindo os nomes dos pinos para os sensores
 #define ONE_WIRE_BUS 4
@@ -47,6 +60,9 @@ void setup() {
     }
     Serial.println("Conectado ao WiFi");
 
+        // Iniciar NTP Client
+    timeClient.begin();
+
     // Inicializando sensores
     sensors.begin();
     dht.begin();
@@ -60,6 +76,19 @@ void setup() {
 }
 
 void loop() {
+  // Atualizando o tempo
+    timeClient.update();
+    unsigned long epochTime = timeClient.getEpochTime();
+    struct tm *ptm = gmtime((time_t *)&epochTime);
+    int year = ptm->tm_year + 1900;
+    int month = ptm->tm_mon + 1;
+    int day = ptm->tm_mday;
+    int hour = ptm->tm_hour;
+    int minute = ptm->tm_min;
+    int second = ptm->tm_sec;
+    String Date = String(day) + "/" + String(month) + "/" + String(year);
+    String Time = String(hour) + ":" + String(minute) + ":" + String(second);
+
     // Geração da mensagem em JSON para enviar
     String json = "{";
     json += "\"espStatus\": true,";
@@ -135,20 +164,19 @@ void loop() {
     json += "\"uv\": " + String(uv) + ",";
 
   //fluxo de agua + status do motor
-    int waterFlux = LOW;
-    waterFlux = digitalRead(waterFlux_Pin);
-
-  if (waterFlux == HIGH) {
-      json += "\"waterFlux\": " + String(waterFlux) + ",";
-      json += "\"engineStatus\": " + String(waterFlux) + ",";
-  } else {
+    int waterFlux = digitalRead(waterFlux_Pin);
+    bool engineStatus = (waterFlux == HIGH);
     json += "\"waterFlux\": " + String(waterFlux) + ",";
-    json += "\"engineStatus\": " + String(waterFlux) + ",";
-  }
+    json += "\"engineStatus\": " + String(engineStatus ? "true" : "false") + ",";
+
+    json += "\"ph\": null,";  // sem sensor de pH
+
+    json += "\"date\": \"" + Date + "\",";
+    json += "\"time\": \"" + Time + "\"";
 
     json += "}";
-    json += "]";
-    json += "}";
+    json += "]}";
+
 
     // Envio dos dados para a interface web
     if (WiFi.status() == WL_CONNECTED) {
