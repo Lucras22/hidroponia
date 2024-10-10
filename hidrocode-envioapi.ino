@@ -29,7 +29,7 @@ NTPClient timeClient(ntpUDP, "pool.ntp.org", -3 * 3600, 60000); // UTC-3 para o 
 
 
 // Defina a URL do servidor
-String url = "https://devicesserver.onrender.com/api/devices/665f4f0b8c75c69202d2631d"; // Substitua pelo ID da hidroponia que foi criada
+String url = "https://devicesserver.onrender.com/api/devices/666840141508522b72de6983"; // Substitua pelo ID da hidroponia que foi criada
 
 // Definindo os nomes dos pinos para os sensores
 #define ONE_WIRE_BUS 4
