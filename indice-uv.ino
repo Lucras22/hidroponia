@@ -43,5 +43,8 @@ void loop()
 
   Serial.print("indice do Sensor UV = ");
   Serial.print(uv);
+  Serial.print("\n");
+
+  delay(10000);
   
 }
