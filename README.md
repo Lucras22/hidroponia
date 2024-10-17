@@ -116,4 +116,4 @@ Essa placa solar será conectada ao módulo de carregamento para fornecer energi
 
 ## Diagrama Simplificado do Circuito:
 * Baterias (7.4V) → Regulador de Tensão (7.4V → 5V) → Interruptor (Liga/Desliga) → ESP32 (pino VIN e GND).
-* Baterias (7.4V) → Placa de Carregamento DDTCCRUB-2S-1A ← Entrada USB-C/Placa Solar.
+* Baterias (7.4V) ← Placa de Carregamento DDTCCRUB-2S-1A ← Entrada USB-C/Placa Solar.
