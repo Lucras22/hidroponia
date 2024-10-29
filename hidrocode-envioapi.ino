@@ -1,6 +1,15 @@
 //Codigo feito por Lucas Galindo
 //Artigos estudados:
+/*conversão de valores UV:
+Sensor TDS:
+Sensor LDR:
+Sensor Temp_Agua:
+Sensor DHT22:
+Sensor Ultra_Sonico:
+Sensor Fluxo:
+*/
 
+//NTP Cliente:
 
 
 
