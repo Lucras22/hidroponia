@@ -11,8 +11,8 @@ Sensor Ultra_Sonico: https://www.usinainfo.com.br/blog/projeto-sensor-ultrassoni
 Sensor Fluxo: https://www.usinainfo.com.br/blog/sensor-de-fluxo-de-agua-para-arduino-1-30-lmin/
 */
 
-//NTP Cliente:
-
+//NTP Cliente (Estudos):
+// https://curtocircuito.com.br/blog/Categoria%20IoT/protocolo-ntp-para-ESP32
 
 
 //Bibliotecas usadas
