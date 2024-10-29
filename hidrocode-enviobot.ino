@@ -1,3 +1,16 @@
+//Codigo feito por Lucas Galindo
+
+//Estudos dos sensores:
+
+/*conversão de valores UV: https://www.usinainfo.com.br/blog/projeto-sensor-uv-guva-s12sd-com-arduino/
+Sensor TDS: https://www.usinainfo.com.br/blog/projeto-medidor-de-tds-arduino-para-condutividade-da-agua/
+Sensor LDR: https://www.usinainfo.com.br/ldr/ldr-sensor-de-luminosidade-5mm-2982.html?search_query=LDR&results=24
+Sensor Temp_Agua: https://www.usinainfo.com.br/blog/sensor-de-temperatura-arduino-ds18b20-comunicacao-onewire/
+Sensor DHT22: https://www.usinainfo.com.br/sensor-de-umidade-arduino/sensor-de-umidade-e-temperatura-dht22-am2302-original-40-a-80c-2813.html?search_query=dht&results=20
+Sensor Ultra_Sonico: https://www.usinainfo.com.br/blog/projeto-sensor-ultrassonico-hc-sr04-com-arduino/
+Sensor Fluxo: https://www.usinainfo.com.br/blog/sensor-de-fluxo-de-agua-para-arduino-1-30-lmin/
+*/
+
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include <OneWire.h>
