@@ -1,5 +1,7 @@
 //Codigo feito por Lucas Galindo
+
 //Estudos dos sensores:
+
 /*conversão de valores UV: https://www.usinainfo.com.br/blog/projeto-sensor-uv-guva-s12sd-com-arduino/
 Sensor TDS: https://www.usinainfo.com.br/blog/projeto-medidor-de-tds-arduino-para-condutividade-da-agua/
 Sensor LDR: https://www.usinainfo.com.br/ldr/ldr-sensor-de-luminosidade-5mm-2982.html?search_query=LDR&results=24
