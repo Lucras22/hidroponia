@@ -67,8 +67,8 @@ DHT dht(DHT_PIN, DHT22);
 
 
 // Constantes para os tempos de ligar e desligar (em milissegundos)
-const unsigned long intervalOn = 15 * 60 * 1000;  // 15 minutos
-const unsigned long intervalOff = 15 * 60 * 1000; // 15 minutos
+const unsigned long intervalOn = 1000; //15 * 60 * 1000;  // 15 minutos
+const unsigned long intervalOff = 1000; //15 * 60 * 1000; // 15 minutos
 
 void setup() {
     Serial.begin(115200);
@@ -119,12 +119,12 @@ void relayTask(void *parameter) {
         if (relayState && (currentMillis - previousMillis >= intervalOn)) {
             // Desliga o relé após 15 minutos ligado
             relayState = false;
-            digitalWrite(relayPin, LOW);
+            digitalWrite(relayPin, HIGH);
             previousMillis = currentMillis;
         } else if (!relayState && (currentMillis - previousMillis >= intervalOff)) {
             // Liga o relé após 15 minutos desligado
             relayState = true;
-            digitalWrite(relayPin, HIGH);
+            digitalWrite(relayPin, LOW);
             previousMillis = currentMillis;
         }
 
@@ -225,7 +225,7 @@ void loop() {
     int waterFlux = digitalRead(waterFlux_Pin);
     bool engineStatus = (waterFlux == LOW);
     json += "\"waterFlux\": " + String(waterFlux) + ",";
-    json += "\"engineStatus\": " + String(engineStatus ? "true" : "false") + ",";
+    json += "\"engineStatus\": " + String(engineStatus ? "false" : "true") + ",";
 
     json += "\"ph\": null,";  // sem sensor de pH
 
