@@ -16,6 +16,7 @@ Sensor Fluxo: https://www.usinainfo.com.br/blog/sensor-de-fluxo-de-agua-para-ard
 
 
 //Bibliotecas usadas
+#include <Arduino.h>
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include <NTPClient.h>
@@ -55,8 +56,7 @@ String url = "https://devicesserver.onrender.com/api/devices/673ddc26eb9737c9922
 #define TDS_PIN 32
 #define UV_PIN 33
 #define waterFlux_Pin 12
-#define RELE1_PIN 19
-#define RELE2_PIN 20
+#define relayPin  19
 
 int waterFlux = 0;
 
@@ -64,6 +64,11 @@ int waterFlux = 0;
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 DHT dht(DHT_PIN, DHT22);
+
+
+// Constantes para os tempos de ligar e desligar (em milissegundos)
+const unsigned long intervalOn = 15 * 60 * 1000;  // 15 minutos
+const unsigned long intervalOff = 15 * 60 * 1000; // 15 minutos
 
 void setup() {
     Serial.begin(115200);
@@ -89,6 +94,43 @@ void setup() {
     pinMode(TDS_PIN, INPUT);
     pinMode(UV_PIN, INPUT);
     pinMode(waterFlux_Pin, INPUT_PULLUP);
+
+
+    // Inicia a tarefa para o controle do relé
+    xTaskCreatePinnedToCore(
+        relayTask,        // Função que executa a tarefa
+        "Relay Control",  // Nome da tarefa
+        1000,             // Tamanho da pilha (em palavras)
+        NULL,             // Parâmetro para passar à tarefa (não utilizado aqui)
+        1,                // Prioridade da tarefa
+        NULL,             // Handle da tarefa (não utilizado aqui)
+        1                 // Executar no núcleo 1 (para separar do loop)
+    );
+}
+
+// Função da tarefa para controlar o relé
+void relayTask(void *parameter) {
+    bool relayState = false; // Estado inicial do relé
+    unsigned long previousMillis = millis();
+
+    while (true) {
+        unsigned long currentMillis = millis();
+
+        if (relayState && (currentMillis - previousMillis >= intervalOn)) {
+            // Desliga o relé após 15 minutos ligado
+            relayState = false;
+            digitalWrite(relayPin, LOW);
+            previousMillis = currentMillis;
+        } else if (!relayState && (currentMillis - previousMillis >= intervalOff)) {
+            // Liga o relé após 15 minutos desligado
+            relayState = true;
+            digitalWrite(relayPin, HIGH);
+            previousMillis = currentMillis;
+        }
+
+        // Delay para evitar loop desnecessário, ajustável para precisão
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+    }
 }
 
 void loop() {
