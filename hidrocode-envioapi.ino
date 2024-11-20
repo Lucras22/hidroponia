@@ -28,9 +28,13 @@ Sensor Fluxo: https://www.usinainfo.com.br/blog/sensor-de-fluxo-de-agua-para-ard
 const char* ssid = "WIFI LISA";
 const char* password = "34Eua7WYBn";
 
-// conexão da rede Wi-Fi
+// conexão da rede Wi-Fi DISCENTES
 // const char* ssid = "IFCE_DISCENTES"; 
 // const char* password = "ifce@bvg";
+
+// conexão da rede Wi-Fi TAUA
+// const char* ssid = "Festival Gastronomico Privado"; 
+// const char* password = "gastronomia10";
 
 // teste
 // Configurações para o NTP (Time)
