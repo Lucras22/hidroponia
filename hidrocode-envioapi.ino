@@ -55,10 +55,11 @@ String url = "https://devicesserver.onrender.com/api/devices/673ddc26eb9737c9922
 #define DHT_PIN 15
 #define TDS_PIN 32
 #define UV_PIN 33
-#define waterFlux_Pin 12
+#define waterFlux_Pin 35
 #define relayPin  19
+#define LED_BUILTIN 2
 
-int waterFlux = 0;
+int waterFlux = 1;
 
 // Inicializando sensores
 OneWire oneWire(ONE_WIRE_BUS);
@@ -67,8 +68,8 @@ DHT dht(DHT_PIN, DHT22);
 
 
 // Constantes para os tempos de ligar e desligar (em milissegundos)
-const unsigned long intervalOn = 1000; //15 * 60 * 1000;  // 15 minutos
-const unsigned long intervalOff = 1000; //15 * 60 * 1000; // 15 minutos
+const unsigned long intervalOn = 1000 * 60; //15 * 60 * 1000;  // 15 minutos
+const unsigned long intervalOff = 1000 * 60; //15 * 60 * 1000; // 15 minutos
 
 void setup() {
     Serial.begin(115200);
@@ -94,6 +95,7 @@ void setup() {
     pinMode(TDS_PIN, INPUT);
     pinMode(UV_PIN, INPUT);
     pinMode(waterFlux_Pin, INPUT_PULLUP);
+    pinMode(LED_BUILTIN, OUTPUT);
 
 
     // Inicia a tarefa para o controle do relé
@@ -120,11 +122,13 @@ void relayTask(void *parameter) {
             // Desliga o relé após 15 minutos ligado
             relayState = false;
             digitalWrite(relayPin, HIGH);
+            digitalWrite(LED_BUILTIN, LOW);
             previousMillis = currentMillis;
         } else if (!relayState && (currentMillis - previousMillis >= intervalOff)) {
             // Liga o relé após 15 minutos desligado
             relayState = true;
             digitalWrite(relayPin, LOW);
+            digitalWrite(LED_BUILTIN, HIGH);
             previousMillis = currentMillis;
         }
 
