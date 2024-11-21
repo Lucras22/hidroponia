@@ -71,11 +71,11 @@ Sensor de Índice UV
 
 Porta: UV_PIN (GPIO 33)
 
-Botão (para fluxo de água)
+Sensor de Fluxo de Agua
 
-Porta: BUTTON_PIN (GPIO 12)
+Porta: WalterFlux_PIN (GPIO 35)
 
-Relé (para controle de algum dispositivo)
+Relé (para controle da Bompa de agua)
 
 Porta: RELAY_PIN (GPIO 19)
 
