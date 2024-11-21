@@ -162,6 +162,12 @@ void loop() {
     float waterTemperature = sensors.getTempCByIndex(0);
     json += "\"waterTemperature\": " + String(waterTemperature) + ",";
 
+
+    // Strings para os estados de nível
+    String Baixo = "Baixo";
+    String Medio = "Medio";
+    String Alto = "Alto";
+    
     // Nível de água
     digitalWrite(TRIG_PIN, LOW);
     delayMicroseconds(2);
@@ -169,8 +175,16 @@ void loop() {
     delayMicroseconds(10);
     digitalWrite(TRIG_PIN, LOW);
     long duration = pulseIn(ECHO_PIN, HIGH);
-    float containerLevel = (duration * 0.0343) / 2;
-    json += "\"containerLevel\": " + String(containerLevel) + ",";
+    float nivel = (duration * 0.0343) / 2;
+
+  // Condição do nível de água
+  if (nivel > 23.0) {
+    json += "\"containerLevel\": \"" + Baixo + "\",";
+  } else if (nivel <= 23.0 && nivel > 11.5) {
+    json += "\"containerLevel\": \"" + Medio + "\",";
+  } else {
+    json += "\"containerLevel\": \"" + Alto + "\",";
+  }
 
     // Temperatura e Umidade
     float humidity = dht.readHumidity();
