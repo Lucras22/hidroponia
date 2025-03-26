@@ -26,12 +26,12 @@ Sensor Fluxo: https://www.usinainfo.com.br/blog/sensor-de-fluxo-de-agua-para-ard
 #include "DHT.h"
 
 // Credenciais da rede Wi-Fi LISA
-const char* ssid = "WIFI LISA";
-const char* password = "34Eua7WYBn";
+//const char* ssid = "WIFI LISA";
+//const char* password = "34Eua7WYBn";
 
 // conexão da rede Wi-Fi DISCENTES
-// const char* ssid = "IFCE_DISCENTES"; 
-// const char* password = "ifce@bvg";
+ const char* ssid = "IFCE_DISCENTES"; 
+ const char* password = "ifce@bvg";
 
 // conexão da rede Wi-Fi TAUA
 // const char* ssid = "Festival Gastronomico Privado"; 
@@ -42,10 +42,8 @@ const char* password = "34Eua7WYBn";
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org", -3 * 3600, 60000); // UTC-3 para o Brasil
 
-
-
 // Defina a URL do servidor
-String url = "https://devicesserver.onrender.com/api/devices/673ddc26eb9737c99228c69b"; // Substitua pelo ID da hidroponia que foi criada
+String url = "https://hidrowebnia-api.onrender.com/api/devices/673ddc26eb9737c99228c69b"; // Substitua pelo ID da hidroponia que foi criada
 
 // Definindo os nomes dos pinos para os sensores
 #define ONE_WIRE_BUS 4
@@ -60,6 +58,10 @@ String url = "https://devicesserver.onrender.com/api/devices/673ddc26eb9737c9922
 #define LED_BUILTIN 2
 
 int waterFlux = 1;
+
+int um_minuto = 60 * 1000;
+int uma_hora = 60 * um_minuto;
+int tempo = uma_hora;
 
 // Inicializando sensores
 OneWire oneWire(ONE_WIRE_BUS);
@@ -274,5 +276,5 @@ void loop() {
         Serial.println("WiFi desconectado");
     }
 
-    delay(10000); // Delay de 10 segundos antes da próxima leitura
+    delay(tempo); // Delay de 10 segundos antes da próxima leitura
 }
